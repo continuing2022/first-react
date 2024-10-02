@@ -15,6 +15,7 @@ import { Breadcrumb, Layout, Menu, theme, Input, Button, Checkbox, Flex, Rate } 
 import { useNavigate } from 'react-router-dom';
 
 import { fetchChangeData, fetchUpdataData, fetchDelData } from '../../apis/Daily';
+import { fetchQuotes } from '../../apis/quotes';
 import axios from 'axios';
 
 // 输入框
@@ -61,9 +62,10 @@ const Home = () => {
     }
 
     // 完成每日计划的渲染 开始
+    // 计划数据的状态
     const [daily, setDaily] = useState([]);
-
-
+    const [change, setChange] = useState(0);
+    // 引入useEffect获取计划数据
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -71,13 +73,13 @@ const Home = () => {
                     url: 'https://q6zv39.laf.run/get_list',
                     method: 'GET',
                 });
-                setDaily(res.data.list);
+                setDaily(res.data.list); // 只在首次渲染时获取数据
             } catch (error) {
                 console.log(error);
             }
         };
         fetchData();
-    }, [daily]);
+    }, [change]); // 确保只在组件挂载时执行
 
 
     // 获取输入框内容·
@@ -85,34 +87,50 @@ const Home = () => {
         if (searchValue !== '') {
             addDaily(searchValue);
             searchValue = ''
-            console.log(searchValue)
+            // console.log(searchValue)
         } else {
             return;
         }
 
     };
     const addDaily = (value) => {
-        console.log(value);
+        // console.log(value);
         const newData = {
             value: value,
             isCompleted: false,
         };
         fetchChangeData(newData)
+        setChange(change + 1)
     };
 
-    //添加完成事件的效果
-
+    // 完成/删除事件的逻辑
     const update = (id) => {
         fetchUpdataData(id)
-
+        setChange(change + 1)
     };
-
-
     const del = (id) => {
         fetchDelData(id)
-
+        setChange(change + 1)
     };
-    // 完成每日计划的渲染 结束  
+    // console.log(change)
+
+    // 引入每日励志语句的逻辑
+    const [quote, setQuote] = useState();
+    useEffect(() => {
+        const fetchQuoteData = async () => {
+            try {
+                const quoteData = await fetchQuotes();
+                setQuote(quoteData);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+
+        fetchQuoteData();
+    }, []); // 空依赖数组，确保只在组件挂载时运行一次
+
+    console.log(quote);
+
 
     return (
         <Layout
