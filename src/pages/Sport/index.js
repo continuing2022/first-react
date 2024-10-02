@@ -60,7 +60,7 @@ const Sport = () => {
             <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
                 <div className="demo-logo-vertical" />
                 {/* 这是导航窗口 */}
-                <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline"
+                <Menu theme="dark" defaultSelectedKeys={['2']} mode="inline"
                     items={items}
                     onClick={({ key }) => onJump(key)} />
             </Sider>

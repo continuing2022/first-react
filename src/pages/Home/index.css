@@ -3,6 +3,7 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
+    flex-wrap: wrap;
 
     .plan {
         margin: 0px;
@@ -74,7 +75,7 @@
     }
 
     .emotion {
-        height: 100px;
+        height: 200px;
         width: 300px;
         display: flex;
         flex-direction: column;
@@ -84,15 +85,39 @@
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
         p {
+            height: 50px;
+            width: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             color: #FF9500;
             font-size: 18px;
             font-weight: bold;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px #FF9500;
+        }
+
+        .emo {
+            height: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+
+            .span {
+                color: #FF9500;
+                font-size: 18px;
+                font-weight: bold;
+            }
+
         }
     }
 
     .quotes {
+        display: flex;
+        flex-direction: column;
         height: 300px;
-        width: 400px;
+        width: 500px;
         background-color: #FF9500;
         border-radius: 8px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -109,6 +134,8 @@
 
 
             span {
+                display: flex;
+                justify-content: center;
                 font-size: 18px;
                 font-weight: bold;
             }
@@ -123,12 +150,27 @@
             justify-content: center;
             align-items: center;
 
-            span {
-                color: #494005;
-                font-size: 18px;
-                font-weight: bold;
+            .text-quotes {
                 margin-bottom: 10px;
+                width: 400px;
+                display: flex;
+                flex-direction: column;
+
+                span {
+                    color: #494005;
+                    font-size: 18px;
+                    font-weight: bold;
+
+                }
+
+                p {
+                    margin-left: auto;
+                    color: #494005;
+                    font-size: 18px;
+                    font-weight: bold;
+                }
             }
+
 
             p {
                 color: #FFFFFF;
@@ -136,4 +178,26 @@
         }
     }
 
+    .look {
+        display: flex;
+        justify-content: space-between;
+        height: 80px;
+        width: 900px;
+
+        /* background-color: #FF9500; */
+        .Icon {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 60px;
+            height: 80px;
+            color: #FF9500;
+        }
+
+        .Icon:hover {
+            color: black;
+            /* 鼠标悬停时的颜色 */
+        }
+    }
 }

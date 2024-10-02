@@ -4,14 +4,23 @@ import {
     DesktopOutlined,
     SmileOutlined,
     ContainerOutlined,
+    // 每日head图标
     MenuFoldOutlined,
+    // 删除图标
     DeleteOutlined,
     // 心情图标
-    FrownOutlined, MehOutlined
+    FrownOutlined,
+    MehOutlined,
+    // 联系图标
+    GithubOutlined,
+    WeiboCircleOutlined,
+    WechatOutlined,
+    YoutubeOutlined,
+    QqOutlined
 
 } from '@ant-design/icons';
 
-import { Breadcrumb, Layout, Menu, theme, Input, Button, Checkbox, Flex, Rate } from 'antd';
+import { Breadcrumb, Layout, Menu, theme, Input, Button, Checkbox, Flex, Rate, Popconfirm } from 'antd';
 import { useNavigate } from 'react-router-dom';
 
 import { fetchChangeData, fetchUpdataData, fetchDelData } from '../../apis/Daily';
@@ -30,6 +39,7 @@ function getItem(label, key, icon, children) {
         label,
     };
 }
+// 心情
 const customIcons = {
     1: <FrownOutlined />,
     2: <FrownOutlined />,
@@ -37,13 +47,18 @@ const customIcons = {
     4: <SmileOutlined />,
     5: <SmileOutlined />,
 };
+
+// 边框菜单
 const items = [
     // 这是左边框
     getItem('Daily', '1', <ContainerOutlined />),
     getItem('Sport', '2', <SmileOutlined />),
     getItem('Study', '3', <DesktopOutlined />),
 ];
+// 心情表达
+const desc = ['terrible', 'bad', 'normal', 'good', 'wonderful'];
 const Home = () => {
+
     const [collapsed, setCollapsed] = useState(false);
     const {
         token: { colorBgContainer, borderRadiusLG },
@@ -93,6 +108,7 @@ const Home = () => {
         }
 
     };
+    // 添加日常计划
     const addDaily = (value) => {
         // console.log(value);
         const newData = {
@@ -103,24 +119,27 @@ const Home = () => {
         setChange(change + 1)
     };
 
-    // 完成/删除事件的逻辑
+    // 更新事件的逻辑
     const update = (id) => {
         fetchUpdataData(id)
         setChange(change + 1)
     };
+    // 删除事件的逻辑
     const del = (id) => {
         fetchDelData(id)
         setChange(change + 1)
     };
     // console.log(change)
 
+    // 心情表达 默认
+    const [value, setValue] = useState(3);
     // 引入每日励志语句的逻辑
-    const [quote, setQuote] = useState();
+    const [quotes, setQuotes] = useState();
     useEffect(() => {
         const fetchQuoteData = async () => {
             try {
                 const quoteData = await fetchQuotes();
-                setQuote(quoteData);
+                setQuotes(quoteData);
             } catch (error) {
                 console.log(error);
             }
@@ -129,10 +148,32 @@ const Home = () => {
         fetchQuoteData();
     }, []); // 空依赖数组，确保只在组件挂载时运行一次
 
-    console.log(quote);
+    // console.log(quotes);
+    // 实现句子自动跳转
+    const [current, setCurrent] = useState(0);
+    useEffect(() => {
+        // 设置定时器 每五秒切换图片
+        const interval = setInterval(() => {
+            setCurrent((prevIndex) => {
+                return (prevIndex + 1) % quotes?.length;
+            });
+        }, 10000);
+        // 清除定时器
+        return () => {
+            clearInterval(interval);
+        };
+    }, [quotes?.length])
+    // console.log(quotes[current])
+    console.log(current)
+    // 点击next按钮实现跳转 
+    const NextQuotes = () => {
+        setCurrent((prevIndex) =>
+            (prevIndex + 1) % quotes?.length);
+    }
 
 
     return (
+
         <Layout
             style={{
                 minHeight: '100vh',
@@ -169,7 +210,7 @@ const Home = () => {
                     <div className='content'
                         style={{
                             padding: 24,
-                            minHeight: 360,
+                            minHeight: 600,
                             background: colorBgContainer,
                             borderRadius: borderRadiusLG,
                         }}
@@ -228,11 +269,12 @@ const Home = () => {
                         {/* 心情图标 */}
                         <div className='emotion'>
                             <p>当前心情</p>
-                            <Flex gap="middle" vertical>
-                                <Rate defaultValue={3} character={({ index = 0 }) => customIcons[index + 1]}
+                            <Flex gap="middle" vertical className='emo'>
+                                <Rate tooltips={desc} onChange={setValue} value={value} defaultValue={3} character={({ index = 0 }) => customIcons[index + 1]}
                                     style={{
                                         fontSize: 36,
                                     }} />
+                                {value ? <span className='span'>{desc[value - 1]}</span> : null}
                             </Flex>
                         </div>
                         <div className='quotes'>
@@ -240,17 +282,112 @@ const Home = () => {
                                 <span>One sentence a Day</span>
                             </div>
                             <div className='text'>
-                                <span>
-                                    you are good
-                                </span>
+                                <div className='text-quotes'>
+                                    <span>
+                                        {quotes && quotes[current] ? quotes[current].quote : 'No quote available'}
+                                    </span>
+                                    <p>————{quotes && quotes[current] ? quotes[current].author : 'No quote available'}</p>
+                                </div>
+
+
                                 <Button type="primary" autoInsertSpace={false}
                                     style={{
                                         backgroundColor: '#FF9500', // 修改按钮背景色
                                         borderColor: '#FF9500' // 修改按钮边框颜色
-                                    }}>
+                                    }}
+                                    onClick={NextQuotes}>
                                     <p>Next</p>
                                 </Button>
                             </div>
+                        </div>
+                        <div className='look'>
+                            {/* 渲染 customIcons 中所有的图标 */}
+                            <Popconfirm
+                                title="Prompt"
+                                // 这个是描述
+                                description="GitHub:continuing2022"
+                                // onConfirm={confirm}
+                                onOpenChange={() => console.log('open change')}
+                            >
+                                <div className='Icon'>
+
+                                    <GithubOutlined
+                                        style={{
+                                            fontSize: 50,
+                                        }} />
+                                    <p>GitHub</p>
+                                </div>
+                            </Popconfirm>
+
+                            <Popconfirm
+                                title="Prompt"
+                                // 这个是描述
+                                description="Weibo:顾小姐喜欢我"
+                                // onConfirm={confirm}
+                                onOpenChange={() => console.log('open change')}
+                            >
+                                <div className='Icon'>
+
+                                    <WeiboCircleOutlined
+                                        style={{
+                                            fontSize: 50,
+                                        }} />
+                                    <p>WeiBo</p>
+                                </div>
+                            </Popconfirm>
+
+                            <Popconfirm
+                                title="Prompt"
+                                // 这个是描述
+                                description="WeChat:Continue0503"
+                                // onConfirm={confirm}
+                                onOpenChange={() => console.log('open change')}
+                            >
+                                <div className='Icon'>
+
+                                    <WechatOutlined
+                                        style={{
+                                            fontSize: 50,
+                                        }} />
+                                    <p>WeChat</p>
+                                </div>
+                            </Popconfirm>
+
+                            <Popconfirm
+                                title="Prompt"
+                                // 这个是描述
+                                description="YouTube:kainengzhang35@gmail.com"
+                                // onConfirm={confirm}
+                                onOpenChange={() => console.log('open change')}
+                            >
+                                <div className='Icon'>
+
+                                    <YoutubeOutlined
+                                        style={{
+                                            fontSize: 50,
+                                        }} />
+                                    <p>YouTube</p>
+                                </div>
+                            </Popconfirm>
+
+
+                            <Popconfirm
+                                title="Prompt"
+                                // 这个是描述
+                                description="QQ:154560489"
+                                // onConfirm={confirm}
+                                onOpenChange={() => console.log('open change')}
+                            >
+                                <div className='Icon' >
+
+                                    <QqOutlined
+                                        style={{
+                                            fontSize: 50,
+                                        }} />
+                                    <p>QQ</p>
+
+                                </div>
+                            </Popconfirm>
                         </div>
                     </div>
 
@@ -260,7 +397,7 @@ const Home = () => {
                         textAlign: 'center',
                     }}
                 >
-                    Ant Design ©{new Date().getFullYear()} Created by Ant UED
+                    ©{new Date().getFullYear()} Created by zhang
                 </Footer>
             </Layout>
         </Layout>
