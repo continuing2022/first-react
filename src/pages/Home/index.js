@@ -217,7 +217,23 @@ const Home = () => {
                                     }} />
                             </Flex>
                         </div>
-
+                        <div className='quotes'>
+                            <div className='head'>
+                                <span>One sentence a Day</span>
+                            </div>
+                            <div className='text'>
+                                <span>
+                                    you are good
+                                </span>
+                                <Button type="primary" autoInsertSpace={false}
+                                    style={{
+                                        backgroundColor: '#FF9500', // 修改按钮背景色
+                                        borderColor: '#FF9500' // 修改按钮边框颜色
+                                    }}>
+                                    <p>Next</p>
+                                </Button>
+                            </div>
+                        </div>
                     </div>
 
                 </Content>
