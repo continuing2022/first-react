@@ -6,10 +6,12 @@ import {
     ContainerOutlined,
     MenuFoldOutlined,
     DeleteOutlined,
+    // 心情图标
+    FrownOutlined, MehOutlined
 
 } from '@ant-design/icons';
 
-import { Breadcrumb, Layout, Menu, theme, Input, Button, Checkbox } from 'antd';
+import { Breadcrumb, Layout, Menu, theme, Input, Button, Checkbox, Flex, Rate } from 'antd';
 import { useNavigate } from 'react-router-dom';
 
 import { fetchChangeData, fetchUpdataData, fetchDelData } from '../../apis/Daily';
@@ -27,6 +29,13 @@ function getItem(label, key, icon, children) {
         label,
     };
 }
+const customIcons = {
+    1: <FrownOutlined />,
+    2: <FrownOutlined />,
+    3: <MehOutlined />,
+    4: <SmileOutlined />,
+    5: <SmileOutlined />,
+};
 const items = [
     // 这是左边框
     getItem('Daily', '1', <ContainerOutlined />),
@@ -198,8 +207,19 @@ const Home = () => {
 
                             </div>
                         </div>
+                        {/* 心情图标 */}
+                        <div className='emotion'>
+                            <p>当前心情</p>
+                            <Flex gap="middle" vertical>
+                                <Rate defaultValue={3} character={({ index = 0 }) => customIcons[index + 1]}
+                                    style={{
+                                        fontSize: 36,
+                                    }} />
+                            </Flex>
+                        </div>
 
                     </div>
+
                 </Content>
                 <Footer
                     style={{

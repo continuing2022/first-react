@@ -1,4 +1,9 @@
 .content {
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
     .plan {
         margin: 0px;
         padding: 0px;
@@ -56,16 +61,33 @@
             display: flex;
             flex-direction: column;
 
+
             .plans {
+                margin-bottom: 5px;
                 display: flex;
                 width: 100%;
                 justify-content: space-between;
                 align-items: center;
-
             }
         }
 
     }
 
+    .emotion {
+        height: 100px;
+        width: 300px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+        p {
+            color: #FF9500;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    }
 
 }
