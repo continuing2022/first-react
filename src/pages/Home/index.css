@@ -54,15 +54,13 @@
             width: 90%;
             margin-top: 10px;
             display: flex;
+            flex-direction: column;
 
             .plans {
                 display: flex;
                 width: 100%;
-
-                p {
-                    margin-left: auto;
-                    color: red;
-                }
+                justify-content: space-between;
+                align-items: center;
 
             }
         }
