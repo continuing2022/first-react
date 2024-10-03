@@ -120,9 +120,16 @@ const Home = () => {
     };
 
     // 更新事件的逻辑
+    // 使用对象存储 accomplish 状态，每个 _id 作为键
+    const [accomplishStates, setAccomplishStates] = useState({});
     const update = (id) => {
         fetchUpdataData(id)
         setChange(change + 1)
+        // 切换对应 id 的 accomplish 状态
+        setAccomplishStates((prev) => ({
+            ...prev,
+            [id]: !prev[id], // 切换指定项的状态
+        }));
     };
     // 删除事件的逻辑
     const del = (id) => {
@@ -234,9 +241,6 @@ const Home = () => {
                                     style={{
 
                                         width: 270,
-                                        // hoverBorderColor: '#FF9500',
-                                        // activeBorderColor: '#FF9500',
-                                        // hoverBg: '#FF9500',
                                     }}
                                     // 改变按钮的颜色
                                     enterButton={<Button type="primary" style={{ backgroundColor: '#FF9500', borderColor: '#FF9500' }}
@@ -249,11 +253,19 @@ const Home = () => {
                                 {/* 渲染组件 */}
                                 {
                                     daily?.map((data) => {
+                                        const isAccomplished = accomplishStates[data._id] || false; // 默认状态为 false
                                         return (
-                                            <div className='plans'
-                                                key={data._id}>
+                                            // className = {`plans ${!accomplish ? 'updateColor' : ' '}`
+                                            <div className={`plans`}
+
+                                                key={data._id}
+                                                style={{
+                                                    backgroundColor: isAccomplished ? '#F0F0F0' : 'transparent', // 设置背景色为灰色
+                                                }}>
                                                 <Checkbox
-                                                    onClick={() => update(data._id)}>
+                                                    onClick={() => update(data._id)}
+                                                    checked={isAccomplished} // 控制 Checkbox 的选中状态
+                                                >
                                                     {data.value}
                                                 </Checkbox>
                                                 <DeleteOutlined onClick={() => del(data._id)}

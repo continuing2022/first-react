@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import './index.css'
 import {
     DesktopOutlined,
     SmileOutlined,
@@ -8,7 +8,7 @@ import {
 
 } from '@ant-design/icons';
 
-import { Breadcrumb, Layout, Menu, theme } from 'antd';
+import { Breadcrumb, Layout, Menu, theme, Flex, Progress, Tooltip, InputNumber } from 'antd';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -47,8 +47,12 @@ const Study = () => {
         }
         // navigate(`/{value}`)
     }
+    // 控制输入框的显示与否 
+    const [showInput, setShowInput] = useState(false); // State to control visibility of InputNumber
 
-
+    const handleProgressClick = () => {
+        setShowInput(!showInput); // Toggle the visibility on click
+    };
 
 
     return (
@@ -85,15 +89,87 @@ const Study = () => {
                         <Breadcrumb.Item>My-Daily-Life</Breadcrumb.Item>
                     </Breadcrumb>
                     {/* 内容书写 */}
-                    <div className='content'
+                    <div className='content2'
                         style={{
                             padding: 24,
-                            minHeight: 360,
-                            background: colorBgContainer,
+                            minHeight: 500,
+                            background: '#FFFFFF',
                             borderRadius: borderRadiusLG,
                         }}
                     >
+                        <div className='body'>
 
+                            <p>Study-Skills</p>
+                            <div className='course'>
+                                <ul>
+                                    <li>
+                                        <Flex gap="small" wrap>
+                                            {/* 添加提示词 */}
+                                            <Tooltip title="3 done / 3 in progress / 4 to do">
+                                                <div onClick={handleProgressClick}>
+                                                    <Progress type="circle" percent={100}
+                                                        // 改变颜色
+                                                        strokeColor='#FF9500'
+                                                    />
+                                                </div>
+                                            </Tooltip>
+                                        </Flex>
+                                        {showInput && ( // Conditionally render InputNumber
+                                            <InputNumber min={1} max={10} defaultValue={3} changeOnWheel />
+                                        )}
+
+                                        <a href='https://www.bilibili.com/video/BV14J4114768?p=6'>HTML</a>
+                                    </li>
+                                    <li>
+                                        <Flex gap="small" wrap>
+                                            <Tooltip title="3 done / 3 in progress / 4 to do">
+                                                <Progress type="circle" percent={75}
+                                                    strokeColor='#FF9500' />
+                                            </Tooltip>
+                                        </Flex>
+                                        <InputNumber min={1} max={10} defaultValue={3} changeOnWheel />
+                                        <a href='https://www.bilibili.com/video/BV14J4114768?p=6'>CSS</a>
+                                    </li>
+                                    <li>
+                                        <Flex gap="small" wrap>
+                                            <Tooltip title="3 done / 3 in progress / 4 to do">
+                                                <Progress type="circle" percent={75}
+                                                    strokeColor='#FF9500' />
+                                            </Tooltip>
+                                        </Flex>
+                                        <a href='https://www.bilibili.com/video/BV1Y84y1L7Nn?p=8'>JavaScript</a>
+                                    </li>
+                                    <li>
+                                        <Flex gap="small" wrap>
+                                            <Tooltip title="3 done / 3 in progress / 4 to do">
+                                                <Progress type="circle" percent={75}
+                                                    strokeColor='#FF9500' />
+                                            </Tooltip>
+                                        </Flex>
+                                        <a href='https://www.bilibili.com/video/BV1a34y167AZ?p=5'>Node.js</a>
+                                    </li>
+                                    <li>
+                                        <Flex gap="small" wrap>
+                                            <Tooltip title="3 done / 3 in progress / 4 to do">
+                                                <Progress type="circle" percent={75}
+                                                    strokeColor='#FF9500' />
+                                            </Tooltip>
+                                        </Flex>
+                                        <a href='https://www.bilibili.com/video/BV18X4y1k74c?p=6'>算法分析与设计</a>
+                                    </li>
+                                    <li>
+                                        <Flex gap="small" wrap>
+                                            <Tooltip title="3 done / 3 in progress / 4 to do">
+                                                <Progress type="circle" percent={75}
+                                                    strokeColor='#FF9500' />
+                                            </Tooltip>
+                                        </Flex>
+                                        <a href='https://www.bilibili.com/video/BV1et411b73Z?p=7'>C++</a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </div>
 
                     </div>
                 </Content>
@@ -102,7 +178,7 @@ const Study = () => {
                         textAlign: 'center',
                     }}
                 >
-                    Ant Design ©{new Date().getFullYear()} Created by Ant UED
+                    ©{new Date().getFullYear()} Created by Zhang
                 </Footer>
             </Layout>
         </Layout>
