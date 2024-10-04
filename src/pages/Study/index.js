@@ -8,11 +8,12 @@ import {
 
 } from '@ant-design/icons';
 
-import { Breadcrumb, Layout, Menu, theme, Flex, Progress, Tooltip, InputNumber } from 'antd';
+import { Breadcrumb, Layout, Menu, theme } from 'antd';
 import { useNavigate } from 'react-router-dom';
 
 
-// 输入框
+// 导入封装好的组件
+import { StudyPercent } from '../../component'
 
 // const onSearch = (value, _e, info) => console.log(info?.source, value);
 const { Header, Content, Footer, Sider } = Layout;
@@ -47,12 +48,6 @@ const Study = () => {
         }
         // navigate(`/{value}`)
     }
-    // 控制输入框的显示与否 
-    const [showInput, setShowInput] = useState(false); // State to control visibility of InputNumber
-
-    const handleProgressClick = () => {
-        setShowInput(!showInput); // Toggle the visibility on click
-    };
 
 
     return (
@@ -103,68 +98,22 @@ const Study = () => {
                             <div className='course'>
                                 <ul>
                                     <li>
-                                        <Flex gap="small" wrap>
-                                            {/* 添加提示词 */}
-                                            <Tooltip title="3 done / 3 in progress / 4 to do">
-                                                <div onClick={handleProgressClick}>
-                                                    <Progress type="circle" percent={100}
-                                                        // 改变颜色
-                                                        strokeColor='#FF9500'
-                                                    />
-                                                </div>
-                                            </Tooltip>
-                                        </Flex>
-                                        {showInput && ( // Conditionally render InputNumber
-                                            <InputNumber min={1} max={10} defaultValue={3} changeOnWheel />
-                                        )}
-
-                                        <a href='https://www.bilibili.com/video/BV14J4114768?p=6'>HTML</a>
+                                        <StudyPercent pages={100} name="HTML" url="https://www.bilibili.com/video/BV14J4114768?p=2" />
                                     </li>
                                     <li>
-                                        <Flex gap="small" wrap>
-                                            <Tooltip title="3 done / 3 in progress / 4 to do">
-                                                <Progress type="circle" percent={75}
-                                                    strokeColor='#FF9500' />
-                                            </Tooltip>
-                                        </Flex>
-                                        <InputNumber min={1} max={10} defaultValue={3} changeOnWheel />
-                                        <a href='https://www.bilibili.com/video/BV14J4114768?p=6'>CSS</a>
+                                        <StudyPercent pages={100} name="CSS" url="https://www.bilibili.com/video/BV14J4114768?p=2" />
                                     </li>
                                     <li>
-                                        <Flex gap="small" wrap>
-                                            <Tooltip title="3 done / 3 in progress / 4 to do">
-                                                <Progress type="circle" percent={75}
-                                                    strokeColor='#FF9500' />
-                                            </Tooltip>
-                                        </Flex>
-                                        <a href='https://www.bilibili.com/video/BV1Y84y1L7Nn?p=8'>JavaScript</a>
+                                        <StudyPercent pages={100} name="JavaSrcipt" url="https://www.bilibili.com/video/BV1Y84y1L7Nn?p=3" />
                                     </li>
                                     <li>
-                                        <Flex gap="small" wrap>
-                                            <Tooltip title="3 done / 3 in progress / 4 to do">
-                                                <Progress type="circle" percent={75}
-                                                    strokeColor='#FF9500' />
-                                            </Tooltip>
-                                        </Flex>
-                                        <a href='https://www.bilibili.com/video/BV1a34y167AZ?p=5'>Node.js</a>
+                                        <StudyPercent pages={100} name="算法设计与分析" url="https://www.bilibili.com/video/BV18X4y1k74c?p=3" />
                                     </li>
                                     <li>
-                                        <Flex gap="small" wrap>
-                                            <Tooltip title="3 done / 3 in progress / 4 to do">
-                                                <Progress type="circle" percent={75}
-                                                    strokeColor='#FF9500' />
-                                            </Tooltip>
-                                        </Flex>
-                                        <a href='https://www.bilibili.com/video/BV18X4y1k74c?p=6'>算法分析与设计</a>
+                                        <StudyPercent pages={100} name="Node.js" url="https://www.bilibili.com/video/BV1a34y167AZ?p=2" />
                                     </li>
                                     <li>
-                                        <Flex gap="small" wrap>
-                                            <Tooltip title="3 done / 3 in progress / 4 to do">
-                                                <Progress type="circle" percent={75}
-                                                    strokeColor='#FF9500' />
-                                            </Tooltip>
-                                        </Flex>
-                                        <a href='https://www.bilibili.com/video/BV1et411b73Z?p=7'>C++</a>
+                                        <StudyPercent pages={100} name="C++" url="https://www.bilibili.com/video/BV1et411b73Z?p=4" />
                                     </li>
                                 </ul>
                             </div>
