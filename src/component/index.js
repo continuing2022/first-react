@@ -1,9 +1,17 @@
 
 import { Flex, Progress, Tooltip, InputNumber } from 'antd';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 export const StudyPercent = (params) => {
     // 控制输入框的显示与否 
     const [showInput, setShowInput] = useState(false);
+    useEffect(() => {
+        // 读取 localStorage 中的保存值
+        const savedNumber = localStorage.getItem(`${params.name}`);
+        if (savedNumber) {
+            setNumber(Number(savedNumber));
+        }
+    }, [params.name]);
+
 
     const handleProgressClick = () => {
         setShowInput(!showInput);
@@ -15,6 +23,8 @@ export const StudyPercent = (params) => {
     const changeNumber = (value) => {
         setNumber(value);
         console.log(value);
+        // 修改number的值
+        localStorage.setItem(`${params.name}`, value);
     }
 
     return (
