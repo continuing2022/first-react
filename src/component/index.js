@@ -53,7 +53,7 @@ export const StudyPercent = (params) => {
                 />
             )}
 
-            <a href={params.url}>{params.name}</a>
+            <a href={params.url + number}>{params.name}</a>
         </>
     );
 };

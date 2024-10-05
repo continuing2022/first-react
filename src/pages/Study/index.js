@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './index.css'
 import {
     DesktopOutlined,
@@ -8,7 +8,7 @@ import {
 
 } from '@ant-design/icons';
 
-import { Breadcrumb, Layout, Menu, theme } from 'antd';
+import { Breadcrumb, Layout, Menu, theme, Flex, Progress, Tooltip, InputNumber } from 'antd';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -49,6 +49,28 @@ const Study = () => {
         // navigate(`/{value}`)
     }
 
+    // 实现每日进度的控制
+    const [plan, setPlan] = useState(0);
+    useEffect(() => {
+        //读取localStorage中保存的值
+        const savedPlan = localStorage.getItem('plan');
+        if (savedPlan) {
+            setPlan(Number(savedPlan));
+        }
+    }, [plan])
+    // 需要使用localStorage存储value的值
+    const changePlan = (value) => {
+        setPlan(value)
+        console.log(value)
+        // 修改number的值
+        localStorage.setItem('plan', value);
+    }
+
+    // 控制输入框的显示与否
+    const [showInput, setShowInput] = useState(false);
+    const handleProgressClick = () => {
+        setShowInput(!showInput);
+    };
 
     return (
         <Layout
@@ -87,7 +109,7 @@ const Study = () => {
                     <div className='content2'
                         style={{
                             padding: 24,
-                            minHeight: 500,
+                            minHeight: 700,
                             background: '#FFFFFF',
                             borderRadius: borderRadiusLG,
                         }}
@@ -98,26 +120,51 @@ const Study = () => {
                             <div className='course'>
                                 <ul>
                                     <li>
-                                        <StudyPercent pages={540} name="HTML" url={`https://www.bilibili.com/video/BV14J4114768?p=2`} />
+                                        <StudyPercent pages={540} name="HTML" url={`https://www.bilibili.com/video/BV14J4114768?p=`} />
                                     </li>
                                     <li>
-                                        <StudyPercent pages={540} name="CSS" url="https://www.bilibili.com/video/BV14J4114768?p=2" />
+                                        <StudyPercent pages={540} name="CSS" url="https://www.bilibili.com/video/BV14J4114768?p=" />
                                     </li>
                                     <li>
-                                        <StudyPercent pages={200} name="JavaSrcipt" url="https://www.bilibili.com/video/BV1Y84y1L7Nn?p=3" />
+                                        <StudyPercent pages={200} name="JavaSrcipt" url="https://www.bilibili.com/video/BV1Y84y1L7Nn?p=" />
                                     </li>
                                     <li>
-                                        <StudyPercent pages={74} name="算法设计与分析" url="https://www.bilibili.com/video/BV18X4y1k74c?p=3" />
+                                        <StudyPercent pages={74} name="算法设计与分析" url="https://www.bilibili.com/video/BV18X4y1k74c?p=" />
                                     </li>
                                     <li>
-                                        <StudyPercent pages={96} name="Node.js" url="https://www.bilibili.com/video/BV1a34y167AZ?p=2" />
+                                        <StudyPercent pages={96} name="Node.js" url="https://www.bilibili.com/video/BV1a34y167AZ?p=" />
                                     </li>
                                     <li>
-                                        <StudyPercent pages={314} name="C++" url="https://www.bilibili.com/video/BV1et411b73Z?p=4" />
+                                        <StudyPercent pages={314} name="C++" url="https://www.bilibili.com/video/BV1et411b73Z?p=" />
                                     </li>
                                 </ul>
                             </div>
+                        </div>
+                        <div className='DailyStudy' >
 
+
+                            <Tooltip placement="top" title={`今天已经看了${plan}集`} >
+                                <Flex vertical gap="small">
+                                    <div onClick={handleProgressClick}>
+                                        <Progress
+                                            strokeLinecap="butt"
+                                            percent={(plan * 100 / 30).toFixed(2)}
+                                            // 改变颜色
+                                            strokeColor="#FF9500" />
+
+                                    </div>
+                                </Flex>
+                            </Tooltip>
+
+                            {showInput && (
+                                <InputNumber
+                                    min={0}
+                                    max={30}
+                                    value={plan}
+                                    changeOnWheel
+                                    onChange={changePlan}
+                                />
+                            )}
                         </div>
 
                     </div>
