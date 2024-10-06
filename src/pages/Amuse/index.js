@@ -142,7 +142,7 @@ const Amuse = () => {
                                         <img src={`/assets/img/篮球4.png`} alt='' /> :
                                         <img src={`/assets/img/篮球5.png`} alt='' />
                                     }
-                                    {/* <img src={`./assets/img/篮球5.png`} alt='' /> */}
+                                    {/* {(url === 4)?<img src={`./assets/img/篮球4.png`} alt='' />:<img src={`./assets/img/篮球5.png`} alt='' />} */}
                                     <div className='text'>
                                         <span>{data.title}</span>
                                         <h2>{data.style}</h2>

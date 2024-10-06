@@ -13,7 +13,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 // 导入封装好的组件
-import { StudyPercent } from '../../component'
+import { StudyPercent } from '../../component/Study'
 
 // const onSearch = (value, _e, info) => console.log(info?.source, value);
 const { Header, Content, Footer, Sider } = Layout;
@@ -105,7 +105,7 @@ const Study = () => {
                         }}
                     >
 
-                        <Breadcrumb.Item>My-Daily-Life</Breadcrumb.Item>
+                        <Breadcrumb.Item>My-Study-Skills</Breadcrumb.Item>
                     </Breadcrumb>
                     {/* 内容书写 */}
                     <div className='content2'

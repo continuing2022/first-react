@@ -20,7 +20,7 @@ import {
 
 } from '@ant-design/icons';
 
-import { Breadcrumb, Layout, Menu, theme, Input, Button, Checkbox, Flex, Rate, Popconfirm } from 'antd';
+import { Breadcrumb, Layout, Menu, theme, Input, Button, Checkbox, Flex, Rate, Tooltip } from 'antd';
 import { useNavigate } from 'react-router-dom';
 
 import { fetchChangeData, fetchUpdataData, fetchDelData } from '../../apis/Daily';
@@ -79,6 +79,7 @@ const Home = () => {
     // 完成每日计划的渲染 开始
     // 计划数据的状态
     const [daily, setDaily] = useState([]);
+    // change的作用是为了每次修改、增加、删除数据是发生变化使得useEffect重新渲染
     const [change, setChange] = useState(0);
     // 引入useEffect获取计划数据
     useEffect(() => {
@@ -316,13 +317,7 @@ const Home = () => {
                         </div>
                         <div className='look'>
                             {/* 渲染 customIcons 中所有的图标 */}
-                            <Popconfirm
-                                title="Prompt"
-                                // 这个是描述
-                                description="GitHub:continuing2022"
-                                // onConfirm={confirm}
-                                onOpenChange={() => console.log('open change')}
-                            >
+                            <Tooltip placement="top" title='GitHub:continue2022'>
                                 <div className='Icon'>
 
                                     <GithubOutlined
@@ -331,15 +326,9 @@ const Home = () => {
                                         }} />
                                     <p>GitHub</p>
                                 </div>
-                            </Popconfirm>
+                            </Tooltip>
 
-                            <Popconfirm
-                                title="Prompt"
-                                // 这个是描述
-                                description="Weibo:顾小姐喜欢我"
-                                // onConfirm={confirm}
-                                onOpenChange={() => console.log('open change')}
-                            >
+                            <Tooltip placement="top" title='微博:continue2020'>
                                 <div className='Icon'>
 
                                     <WeiboCircleOutlined
@@ -348,15 +337,8 @@ const Home = () => {
                                         }} />
                                     <p>WeiBo</p>
                                 </div>
-                            </Popconfirm>
-
-                            <Popconfirm
-                                title="Prompt"
-                                // 这个是描述
-                                description="WeChat:Continue0503"
-                                // onConfirm={confirm}
-                                onOpenChange={() => console.log('open change')}
-                            >
+                            </Tooltip>
+                            <Tooltip placement="top" title='微信:Continue0503'>
                                 <div className='Icon'>
 
                                     <WechatOutlined
@@ -365,15 +347,8 @@ const Home = () => {
                                         }} />
                                     <p>WeChat</p>
                                 </div>
-                            </Popconfirm>
-
-                            <Popconfirm
-                                title="Prompt"
-                                // 这个是描述
-                                description="YouTube:kainengzhang35@gmail.com"
-                                // onConfirm={confirm}
-                                onOpenChange={() => console.log('open change')}
-                            >
+                            </Tooltip>
+                            <Tooltip placement="top" title='YouTube:kainengzhang35@gmail.com'>
                                 <div className='Icon'>
 
                                     <YoutubeOutlined
@@ -382,16 +357,8 @@ const Home = () => {
                                         }} />
                                     <p>YouTube</p>
                                 </div>
-                            </Popconfirm>
-
-
-                            <Popconfirm
-                                title="Prompt"
-                                // 这个是描述
-                                description="QQ:154560489"
-                                // onConfirm={confirm}
-                                onOpenChange={() => console.log('open change')}
-                            >
+                            </Tooltip>
+                            <Tooltip placement="top" title='QQ:1545620489'>
                                 <div className='Icon' >
 
                                     <QqOutlined
@@ -401,7 +368,11 @@ const Home = () => {
                                     <p>QQ</p>
 
                                 </div>
-                            </Popconfirm>
+                            </Tooltip>
+
+
+
+
                         </div>
                     </div>
 
