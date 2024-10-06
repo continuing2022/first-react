@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-
+import './index.css'
 import {
     DesktopOutlined,
     SmileOutlined,
     ContainerOutlined,
-
-
 } from '@ant-design/icons';
 
 import { Breadcrumb, Layout, Menu, theme } from 'antd';
@@ -27,10 +25,15 @@ function getItem(label, key, icon, children) {
 const items = [
     // 这是左边框
     getItem('Daily', '1', <ContainerOutlined />),
-    getItem('Sport', '2', <SmileOutlined />),
+    getItem('Amuse', '2', <SmileOutlined />, [
+        getItem('Sport', '4'),
+        getItem('Game', '5'),
+
+    ]),
     getItem('Study', '3', <DesktopOutlined />),
+
 ];
-const Sport = () => {
+const Amuse = () => {
     const [collapsed, setCollapsed] = useState(false);
     const {
         token: { colorBgContainer, borderRadiusLG },
@@ -42,16 +45,18 @@ const Sport = () => {
         console.log(key)
         if (key === '1') {
             navigate('/')
+        } if (key === '3') {
+            navigate(`/3`)
         } else {
-            navigate(`/${key}`)
+            navigate('/2')
         }
         // navigate(`/{value}`)
     }
 
 
 
-
     return (
+
         <Layout
             style={{
                 minHeight: '100vh',
@@ -67,10 +72,12 @@ const Sport = () => {
             <Layout>
                 <Header
                     style={{
-                        padding: 0,
-                        background: colorBgContainer,
+                        color: 'white',
+                        fontSize: '24px'
                     }}
-                />
+                >
+                    <span>Amuse Pages</span>
+                </Header>
                 <Content
                     style={{
                         margin: '0 16px',
@@ -85,14 +92,23 @@ const Sport = () => {
                         <Breadcrumb.Item>My-Daily-Life</Breadcrumb.Item>
                     </Breadcrumb>
                     {/* 内容书写 */}
-                    <div className='content'
+                    <div className='content3'
                         style={{
                             padding: 24,
-                            minHeight: 360,
+                            minHeight: 700,
                             background: colorBgContainer,
                             borderRadius: borderRadiusLG,
                         }}
                     >
+                        <div className='basketabll'>
+                            <img src='./assets/img/篮球.png' alt='' />
+                            <div className='text'>
+                                <span>The Enlightenment Sport</span>
+                                <h2>basketabll</h2>
+                                <p>这是我接触的第一个运动，也是我最喜欢的运动。它能给我带来流汗的快感，以及压力的释放。</p>
+                            </div>
+
+                        </div>
 
 
                     </div>
@@ -108,5 +124,5 @@ const Sport = () => {
         </Layout>
     );
 };
-export default Sport;
+export default Amuse;
 

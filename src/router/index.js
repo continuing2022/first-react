@@ -1,7 +1,7 @@
 
 import { createBrowserRouter } from "react-router-dom";
 import Home from '../pages/Home'
-import Sport from "../pages/Sport";
+import Amuse from "../pages/Amuse";
 import Study from "../pages/Study";
 
 
@@ -12,7 +12,7 @@ const router = createBrowserRouter([
     },
     {
         path: '/2',
-        element: <Sport />
+        element: <Amuse />
     },
     {
         path: '/3',

@@ -1,0 +1,57 @@
+.content3 {
+    /* display: flex;
+    flex-direction: column;
+    justify-content: space-between; */
+
+    .basketabll {
+
+        width: 1000px;
+        height: 600px;
+        margin: auto;
+
+
+        img {
+            width: 1000px;
+            height: auto;
+            object-fit: cover;
+        }
+
+        .text {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            position: relative;
+            top: -380px;
+            left: 200px;
+            height: 200px;
+            width: 600px;
+
+            span {
+                color: #FFFFFF;
+                font-size: 18px;
+            }
+
+            h2 {
+                flex: 0 0 auto;
+                /* 防止它的尺寸被自动调整 */
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100px;
+                width: 150px;
+                border: 1px solid #FFFFFF;
+                color: #FFFFFF;
+                font-size: 26px;
+            }
+
+            p {
+                color: #FFFFFF;
+            }
+        }
+
+
+    }
+
+
+}

@@ -28,13 +28,13 @@ function getItem(label, key, icon, children) {
 const items = [
     // 这是左边框
     getItem('Daily', '1', <ContainerOutlined />),
-    getItem('Sport', '2', <SmileOutlined />),
+    getItem('Amuse', '2', <SmileOutlined />),
     getItem('Study', '3', <DesktopOutlined />),
 ];
 const Study = () => {
     const [collapsed, setCollapsed] = useState(false);
     const {
-        token: { colorBgContainer, borderRadiusLG },
+        token: { borderRadiusLG },
     } = theme.useToken();
 
     // 点击不同的窗口跳转到不同页面
@@ -88,10 +88,12 @@ const Study = () => {
             <Layout>
                 <Header
                     style={{
-                        padding: 0,
-                        background: colorBgContainer,
+                        color: 'white',
+                        fontSize: '24px'
                     }}
-                />
+                >
+                    <span>Study Pages</span>
+                </Header>
                 <Content
                     style={{
                         margin: '0 16px',

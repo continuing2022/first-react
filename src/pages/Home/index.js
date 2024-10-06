@@ -52,7 +52,7 @@ const customIcons = {
 const items = [
     // 这是左边框
     getItem('Daily', '1', <ContainerOutlined />),
-    getItem('Sport', '2', <SmileOutlined />),
+    getItem('Amuse', '2', <SmileOutlined />),
     getItem('Study', '3', <DesktopOutlined />),
 ];
 // 心情表达
@@ -196,10 +196,12 @@ const Home = () => {
             <Layout>
                 <Header
                     style={{
-                        padding: 0,
-                        background: colorBgContainer,
+                        color: 'white',
+                        fontSize: '24px'
                     }}
-                />
+                >
+                    <span>Home Pages</span>
+                </Header>
                 <Content
                     style={{
                         margin: '0 16px',
