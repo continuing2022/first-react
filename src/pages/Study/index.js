@@ -143,8 +143,7 @@ const Study = () => {
                             </div>
                         </div>
                         <div className='DailyStudy' >
-
-
+                            <p>今日任务</p>
                             <Tooltip placement="top" title={`今天已经看了${plan}集`} >
                                 <Flex vertical gap="small">
                                     <div onClick={handleProgressClick}>
